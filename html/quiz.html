@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Anatomy</title>
+    <link rel="stylesheet" href="../styles.css">
+	    <style>
+        /* Fireworks Canvas Styling */
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        .app {
+            position: relative;
+            z-index: 1;
+        }
+		</style>
+	
+</head>
+<body>
+    <header>
+           <img src="../img/Logo/logo.png">
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="anatomy.html">3D Model Viewer</a></li>
+				<li><a href="lesson.html">Learn</a></li>
+                <li><a href="quiz.html" class="active">Quiz</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+	<main>
+    <section id="quizzes">
+		<div class="app">
+		  <h1>MeetAnatomy Quiz: <br> 
+		  <span class="subtitle">Skeletal and Muscular System</span>
+		  </h1>
+			<div class="quiz">
+			  <h2 id="question">Question goes here</h2>
+				<div id="answer-buttons">
+				  <button class="btn">Answer 1</button>
+				  <button class="btn">Answer 2</button>
+				  <button class="btn">Answer 3</button>
+				  <button class="btn">Answer 4</button>
+				</div>
+				<button id="next-btn">Next</button>
+			</div>
+		</div>
+    </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 MEET ANATOMY | Group 5 - (A)DEP3043 Courseware Development Design | Universiti Pendidikan Sultan Idris </p>
+    </footer>
+
+    <!-- Fireworks Canvas -->
+    <canvas id="fireworks"></canvas>
+
+    <script>
+        const questions = [
+	{
+        question: "Which bone structure, also known as the cranium, protects the brain and forms the head, consisting of 22 bones?",
+        answers: [
+            { text: "Skull", correct: true },
+            { text: "Femur", correct: false },
+            { text: "Pelvis", correct: false },
+            { text: "Humerus", correct: false }
+        ]
+    },
+	{
+        question: "Which long bone connects the shoulder to the elbow and is responsible for supporting and moving the arm?",
+        answers: [
+            { text: "Skull", correct: false },
+            { text: "Femur", correct: false },
+            { text: "Pelvis", correct: false },
+            { text: "Humerus", correct: true }
+        ]
+    },
+	{
+        question: "What is a key function of the pelvis?",
+        answers: [
+            { text: "Protects the brain", correct: false },
+            { text: "Stores bone marrow", correct: false },
+            { text: "Aids in movement and balance", correct: true },
+            { text: "Connects the shoulder to the elbow", correct: false }
+        ]
+    },
+	{
+        question: "What makes the femur unique among all bones in the human body?",
+        answers: [
+            { text: "It protects the brain", correct: false },
+            { text: "It connects the arm to the shoulder", correct: false },
+            { text: "It is part of the abdominal structure", correct: false },
+            { text: "It is the longest and strongest bone in the body", correct: true }
+        ]
+    },	
+	{
+        question: "What is a distinguishing feature of the fibula?",
+        answers: [
+            { text: "It protects abdominal organs", correct: false },
+            { text: "It connects the shoulder to the elbow", correct: false },
+            { text: "It produces blood cells in bone marrow", correct: false },
+            { text: " It supports muscles and ligaments in the lower leg", correct: true }
+        ]
+    },	
+    {
+        question: "What is the role of tropomyosin in muscle contraction?",
+        answers: [
+            { text: "To aid in myosin 'cocking' on the actin filament", correct: false },
+            { text: "To release calcium from the sarcoplasmic reticulum", correct: false },
+            { text: "To prevent myosin from continuing to slide up the actin filament", correct: true },
+            { text: "To release troponin from tropomyosin, allowing myosin to bind to the actin filament", correct: false }
+        ]
+    },
+    {
+        question: "What is the role of acetylcholine in calcium release?",
+        answers: [
+            { text: "Binds to the T-tubules, causing calcium release", correct: false },
+            { text: "Binds to sarcoplasmic reticulum, causing calcium release", correct: false },
+            { text: "Stimulates cellular contraction by opening voltage-gated ion channels", correct: true },
+            { text: "Stimulates postsynaptic acetylcholine receptors to release intracellular calcium", correct: false }
+        ]
+    },
+    {
+        question: "Which of the following correctly identifies muscle components in order from largest to smallest?",
+        answers: [
+            { text: "Muscle fiber, fasciculus, myofibril", correct: false },
+            { text: "Fasciculus, muscle fiber, myofibril", correct: true }, 
+            { text: "Fasciculus, muscle bundle, myofibril", correct: false },
+            { text: "Sarcolemma, sarcoplasm, fasciculus", correct: false }
+        ]
+    },
+    {
+        question: "The space between two Z lines constitutes the:",
+        answers: [
+            { text: "Sarcolemma", correct: false },
+            { text: "Sarcophagus", correct: false },
+            { text: "Sarcoplasm", correct: false },
+            { text: "Sarcomere", correct: true }
+        ]
+    },
+    {
+        question: "We would expect to find smooth muscle in all of the following EXCEPT:",
+        answers: [
+            { text: "Esophagus", correct: false },
+            { text: "Small intestine", correct: false },
+            { text: "Myocardial tissue", correct: true },
+            { text: "Pulmonary circulatory tissue", correct: false }
+        ]
+    }
+];
+
+        const questionElement = document.getElementById("question");
+        const answerButtons = document.getElementById("answer-buttons");
+        const nextButton = document.getElementById("next-btn");
+        const canvas = document.getElementById('fireworks');
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        function startQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            nextButton.innerHTML = "Next";
+            canvas.style.display = "none"; // Hide fireworks initially
+            showQuestion();
+        }
+
+        function showQuestion() {
+            resetState();
+            let currentQuestion = questions[currentQuestionIndex];
+            let questionNo = currentQuestionIndex + 1;
+            questionElement.innerHTML = `${questionNo}. ${currentQuestion.question}`;
+
+            currentQuestion.answers.forEach((answer) => {
+                const button = document.createElement("button");
+                button.innerHTML = answer.text;
+                button.classList.add("btn");
+                answerButtons.appendChild(button);
+                if (answer.correct) {
+                    button.dataset.correct = answer.correct;
+                }
+                button.addEventListener("click", selectAnswer);
+            });
+        }
+
+        function resetState() {
+            nextButton.style.display = "none";
+            while (answerButtons.firstChild) {
+                answerButtons.removeChild(answerButtons.firstChild);
+            }
+        }
+
+        function selectAnswer(e) {
+            const selectedBtn = e.target;
+            const isCorrect = selectedBtn.dataset.correct === "true";
+            if (isCorrect) {
+                selectedBtn.classList.add("correct");
+                score++;
+            } else {
+                selectedBtn.classList.add("incorrect");
+            }
+            Array.from(answerButtons.children).forEach((button) => {
+                if (button.dataset.correct === "true") {
+                    button.classList.add("correct");
+                }
+                button.disabled = true;
+            });
+            nextButton.style.display = "block";
+        }
+
+        function showScore() {
+            resetState();
+            questionElement.innerHTML = `<div class="centered-score">You scored ${score} out of ${questions.length}!</div>`;
+            nextButton.innerHTML = "Answer Again";
+			nextButton.style.display = "block";
+            canvas.style.display = "block"; // Show fireworks
+            launchFireworks();
+        }
+
+        function handleNextButton() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                showQuestion();
+            } else {
+                showScore();
+            }
+        }
+
+        nextButton.addEventListener("click", () => {
+            if (currentQuestionIndex < questions.length) {
+                handleNextButton();
+            } else {
+                startQuiz();
+            }
+        });
+
+        // Fireworks Functionality
+        function launchFireworks() {
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const particles = [];
+            function random(min, max) {
+                return Math.random() * (max - min) + min;
+            }
+
+            function createParticle(x, y) {
+                const particle = {
+                    x,
+                    y,
+                    size: random(2, 4),
+                    speedX: random(-3, 3),
+                    speedY: random(-3, 3),
+                    color: `hsl(${Math.random() * 360}, 100%, 50%)`,
+                    life: 50
+                };
+                particles.push(particle);
+            }
+
+            function drawParticles() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                particles.forEach((particle, index) => {
+                    ctx.beginPath();
+                    ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+                    ctx.fillStyle = particle.color;
+                    ctx.fill();
+
+                    particle.x += particle.speedX;
+                    particle.y += particle.speedY;
+                    particle.life--;
+
+                    if (particle.life <= 0) {
+                        particles.splice(index, 1);
+                    }
+                });
+                requestAnimationFrame(drawParticles);
+            }
+
+            function explode(x, y) {
+                for (let i = 0; i < 30; i++) {
+                    createParticle(x, y);
+                }
+            }
+
+            // Automatically trigger fireworks every second
+            setInterval(() => {
+                explode(random(0, canvas.width), random(0, canvas.height));
+            }, 1000);
+
+            drawParticles();
+        }
+
+        // Initialize the quiz
+        startQuiz();
+    </script>
+
+
+
+    <script src="script.js"></script>
+</body>
+</html>

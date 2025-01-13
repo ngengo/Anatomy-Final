@@ -1,0 +1,411 @@
+header img {
+    height: 50px;
+    margin-left: 40px;
+}
+
+body {
+    height: 125vh;
+    background-image: url('https://wallpapers.com/images/hd/gradient-background-n5kitt31l1w0ugme.jpg');
+    background-size: cover;
+    font-family: Arial, sans-serif;
+    margin-top: 80px;
+    padding: 30px;
+    background-color: #ffffff;
+}
+
+header {
+    background-color: white;
+    position: fixed;
+	z-index: 1000;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 0 25px 0 black;
+    justify-content: space-between; /* Space between logo and nav */
+}
+
+nav {
+    display: flex;
+    align-items: center;
+}
+
+nav ul {
+    list-style: none; /* Ensure no bullets */
+    padding: 0; /* Remove default padding */
+    display: flex; /* Horizontal layout */
+}
+
+nav li {
+    margin: 20px;
+    position: relative; /* For positioning the border */
+}
+
+nav li a {
+    color: black;
+    text-decoration: none;
+    padding: 10px 15px; /* Add padding for better click area */
+    border-radius: 25px; /* Rounded corners */
+    transition: border 0.3s; /* Smooth transition for border */
+}
+
+nav li a:hover {
+    color: black;
+    border-color: orange;
+    border: solid 2px orange; /* Add border on hover */
+}
+
+nav li a.active {
+    background-color: transparent; /* Make background transparent */
+    color: black; /* Optional: Contrast for text */
+    font-weight: bold; /* Optional: Emphasize the active link */
+    border: solid 2px purple; /* Keep the border for active state */
+}
+
+.menu-toggle {
+    display: none; /* Hide by default */
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.menu-toggle .bar {
+    height: 3px;
+    width: 25px;
+    background-color: black;
+    margin: 3px 0;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    nav ul {
+        display: none; /* Hide the menu by default */
+        flex-direction: column; /* Stack vertically */
+        position: absolute;
+        top: 80px; /* Position below the header */
+        left: 0;
+        right: 0;
+        background-color: white;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    nav ul.active {
+        display: flex; /* Show the menu when active */
+    }
+
+    .menu-toggle {
+        display: flex; /* Show the hamburger icon */
+    }
+}
+
+section {
+    margin-bottom: 40px;
+    padding: 20px;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+h3, h2, p {
+    color: black;
+}
+
+.viewer {
+    flex-grow: 1; /* Main content takes up remaining space */
+    padding: 10px;
+    background-color: black;
+    color: gray;
+    border: thin solid gray;
+}
+
+iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+
+footer {
+    text-align: center;
+    padding: 10px 0;
+    color: white;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+/* salwa part css */
+.container {
+    text-align: center;
+}
+
+.skeleton {
+    position: relative; /* Relative to the container for precise positioning */
+    display: inline-block;
+}
+
+.info-box {
+	position: absolute; /* Make the box positionable relative to the page */
+	padding: 15px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	background-color: #fff;
+	width: 350px;
+	display: none;
+	z-index: 100; /* Ensure it stays on top */
+}
+
+.skeleton img {
+    width: 100%; /* Ensure the image resizes responsively */
+    height: auto;
+}
+
+.highlight {
+    position: absolute;
+    background-color: rgba(255, 0, 0, 0);
+    border-radius: 50%;
+    pointer-events: auto;
+    transform: translate(-50%, -50%); /* Center the highlight relative to its position */
+}
+
+.skull {
+    top: 7%; /* Percentage relative to the image container */
+    left: 26%; /* Percentage relative to the image container */
+    width: 10%; /* Responsive size */
+    height: 10%; /* Responsive size */
+}
+
+.rib {
+    top: 26%; 
+    left: 25%; 
+    width: 19%; 
+    height: 20%;
+}
+
+.humerus1 {
+    top: 18%;
+    left: 12%; 
+    width: 1.8%; 
+    height: 17%; 
+    transform: rotate(19deg); 
+}
+
+.humerus2 {
+    top: 20%;
+    left: 34%; 
+    width: 1.8%; 
+    height: 17%; 
+    transform: rotate(-8deg); 
+}
+
+.ulna1 {
+    top: 32%; 
+    left: 9%;
+    width: 1.5%; 
+    height: 17%; 
+    transform: rotate(-6deg);
+}
+
+.ulna2 {
+    top: 36%; 
+    left: 36%;
+    width: 1.2%; 
+    height: 12%; 
+    transform: rotate(-6deg);
+}
+
+.pelvis {
+    top: 38%; 
+    left: 19%; 
+    width: 14.5%;
+    height: 12%;
+    transform: rotate(-6deg);
+}
+
+.femur1{
+    top: 48%;
+    left: 20%; 
+    width: 1.5%;
+    height: 20%;
+    transform: rotate(-6deg);
+}
+
+.femur2{
+    top: 48%;
+    left: 31%; 
+    width: 1.5%;
+    height: 20%;
+    transform: rotate(5deg);
+}
+
+.fibula{
+    top: 70%;
+    left: 18%;
+    width: 1.1%;
+    height: 18%;
+    transform: rotate(-2deg);
+}
+
+.tibia1{
+    top: 67%;
+    left: 20%;
+    width: 1.5%;
+    height: 23%;
+    transform: rotate(4deg);
+}
+
+.tibia2{
+    top: 67%;
+    left: 28%;
+    width: 1.7%;
+    height: 23%;
+    transform: rotate(5deg);
+}
+
+.radius{
+    top: 37%;
+    left: 38%;
+    width: 1%;
+    height: 11%;
+    transform: rotate(-8deg);
+}
+
+/* Quiz */
+.app {
+	width: 200%;
+	max-width: 800px;
+	margin: 100px auto 0;
+	border-radius: 20px;
+}
+
+.app h1{
+	text-align: center;
+	font-family: "Times New Roman", Times, serif;
+	font-size: 2.5rem;
+	color: #001e4d;
+	font-weight: bold;
+	border-bottom: 1px solid #333;
+}
+
+h1 .subtitle {
+    font-size: 1.5rem;
+    color: #001e4d;
+    font-weight: normal;
+}
+
+.quiz {
+	padding: 20px 0;
+}
+
+.quiz h2 {
+	font-size: 18px;
+	color: #001e4d;
+	font-weight: 600;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background: #ddd;
+    margin: 20px 0;
+}
+
+/* Question Styling */
+#question {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: #001e4d;
+    font-family: 'Math Sans', serif; 
+}
+
+.btn {
+	background: #fff;
+	color: #222;
+	font-weight: 500;
+	width: 100%;
+	border: 1px solid #222;
+	padding: 10px;
+	margin: 10px 0;
+	text-align: left;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: all 0.3s;
+}
+
+.btn:hover:not([disabled]) {
+	background: #6639ad;
+	color: #fff;
+}
+
+.btn:disabled {
+	cursor: no-drop;
+}
+
+#next-btn {
+	background: #001e4d;
+	color: #fff;
+	font-weight: 500;
+	width: 150px;
+	border: 0;
+	padding: 10px;
+	margin: 20px auto 0;
+	border-radius: 4px;
+	cursor: pointer;
+	display: none;
+}
+
+.correct {
+	background: #9aeabc;
+}
+
+.incorrect {
+	background: #ff9393;
+}
+
+
+/* about */
+#about {
+    text-align: center;
+    margin: 50px 0;
+}
+
+#team {
+    text-align: center;
+    margin: 50px 0;
+}
+
+.team-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.team-member {
+    background-color: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 200px;
+}
+
+.team-member img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        margin-bottom: 15px;
+}
+
+.team-member h3 {
+    font-size: 1.2em;
+    margin-bottom: 5px;
+    color: #001e4d;
+}
+
+.team-member p {
+    font-size: 0.9em;
+    color: #555;
+}
+
